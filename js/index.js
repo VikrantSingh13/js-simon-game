@@ -1,4 +1,4 @@
-var typesOfBalls = ['basket', 'base', 'foot'];
+var typesOfBalls = ['basket', 'base', 'foot', 'deez nuts'];
 
 for(var i = 0; i < typesOfBalls.length; i++){
 	var listElement = document.createElement('li');

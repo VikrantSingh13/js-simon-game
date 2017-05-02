@@ -10,10 +10,39 @@
     
     <div class="counter">
     	<span id="incrementCounter">+</span>
-    	<span id="currentCount">0</span>
+    	<span id="currentCount" style='font-size: 20px'>0</span>
 
     </div>
 
+    <h1>News Letter Form</h1>
+
+    <form action="#" name="newsLetterSubscribe" method="post">
+
+    	<label for="name">Name: </label>
+    	<input type="text" name="name" id="name" />
+    	<br />
+
+    	<label for="email">Email: </label>
+		<input type="text" name="email" id="email" />
+		<br />
+
+		<label> Do you want discount coupons to be emailed to you? <input type="checkbox" name="discountCoupon" /></label>
+		<br />
+
+		<label for="newsType">What type of news do you read the most? </label>
+		<select name="newsType" id="newsType">
+			<option value="sports">Sports</option>
+			<option value="politics">Politics</option>			
+			<option value="business">Business</option>
+			<option value="other">Other</option>
+		</select>
+		<br />
+
+		<label for="otherNewsType"> If other, please specify: <input type='text' for="otherNewsType" /></label>
+		<br />
+		<button type="reset">Reset the form!</button>
+		<input type="submit" value="Subscribe!" />
+	</form> 
 
 	<!-- Scripts -->
 
