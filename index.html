@@ -1,49 +1,73 @@
-<html>
-	<head>
+<!DOCTYPE html>
+<html >
+<head>
+  <meta charset="UTF-8">
+  <title>FCC Simon Game</title>
+  
+  
+  <link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.6/css/bootstrap.min.css'>
 
-	</head>
+      <link rel="stylesheet" href="css/style.css">
 
-	<body>
-	<h1>Here are some types of balls</h1>
-	<ul id="ballList">
-	</ul>
-    <div class="counter">
-    	<span id="incrementCounter">+</span>
-    	<span id="currentCount" style='font-size: 20px'>0</span>
+  
+</head>
 
-    </div>
+<body>
+  <main class="container-fluid">
+  <h2 class="title">Simon Game <span>HARD MODE!</span> </h2>
+  
+  <button id="startButton" class="btn btn-primary">Start</button>
+  </section>
 
-    <h1>News Letter Form</h1>
+  <div class="game" title="Want regular Simon Game? git gud n00b :O">
+    <div class="row">
+      
+      <div class="col scoreDisplay">
+        
+        <div class="row">
+          <div class="col">
+            <div class="label">Score:</div>
+          </div>
+          <div class="col score currentScore">0</div>
+        </div>
+        
+        <div class="row">
+          <div class="col">
+            <div class="label">HighScore:</div>
+          </div>
+          <div class="col score highScore">0</div>
+        </div>
+        
+      </div><!--scoreDisplay ends here-->
+      
+      <div id="q1" class="col greenQuadrant quads">
+      </div>
+      <div id="q2" class="col redQuadrant quads">
+      </div>
+      <div class="col">
+      </div>
+    </div><!-- row ends here -->
 
-    <form action="#" name="newsLetterSubscribe" method="post">
+    <div class="row">
+      <div class="col">
+      </div>
+      <div id="q3" class="col yellowQuadrant quads">
+      </div>
+      <div id="q4" class="col blueQuadrant quads">
+      </div>
+      <div class="col">
+      </div>
+    </div><!-- row ends here -->
+  </div><!--game ends here-->
 
-    	<label for="name">Name: </label>
-    	<input type="text" name="name" id="name" />
-    	<br />
+</main>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/babel-polyfill/6.23.0/polyfill.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js'></script>
+<script src='https://npmcdn.com/tether@1.2.4/dist/js/tether.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.6/js/bootstrap.min.js'></script>
 
-    	<label for="email">Email: </label>
-		<input type="text" name="email" id="email" />
-		<br />
+    <script src="js/index.js"></script>
 
-		<label> Do you want discount coupons to be emailed to you? <input type="checkbox" name="discountCoupon" /></label>
-		<br />
-
-		<label for="newsType">What type of news do you read the most? </label>
-		<select name="newsType" id="newsType">
-			<option value="sports">Sports</option>
-			<option value="politics">Politics</option>			
-			<option value="business">Business</option>
-			<option value="other">Other</option>
-		</select>
-		<br />
-
-		<label for="otherNewsType"> If other, please specify: <input type='text' for="otherNewsType" /></label>
-		<br />
-		<button type="reset">Reset the form!</button>
-		<input type="submit" value="Subscribe!" />
-	</form> 
-
-	<!-- Scripts -->
-	<script src="js/index.js"></script>
-	</body>
+</body>
 </html>

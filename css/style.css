@@ -1,0 +1,86 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto+Slab');
+
+html, body {
+  margin: 0;
+  padding: 0;
+  text-decoration: none;
+  color: #000;
+}
+
+body {
+  background: url('https://i.stack.imgur.com/MtKUX.jpg') center no-repeat;
+}
+
+main {
+  text-align: center;
+  font-family: 'Roboto Slab', serif;
+}
+
+.title {
+  margin: 25px;
+}
+
+#startButton {
+  margin: 0 0 20px;
+}
+
+#startButton:hover{
+  cursor: pointer;
+}
+
+.scoreDisplay .row{
+  background: #F5F5F5;
+  border-radius: 5px;
+}
+
+.label{
+  text-align: right;
+}
+
+.col.scoreDisplay .row .col.score{
+  text-align: left;
+}
+
+.quads:hover {
+  cursor: pointer;
+}
+
+.col.greenQuadrant {
+  background-color: green;
+  height: 16vw;
+  border-top-left-radius: 100%;
+  border: 2vw solid black;
+  border-bottom: 1vw solid black;
+  border-right: 1vw solid black;
+}
+
+.col.redQuadrant {
+  background-color: red;
+  height: 16vw;
+  border-top-right-radius: 100%;
+  border: 2vw solid black;
+  border-bottom: 1vw solid black;
+  border-left: 1vw solid black;
+}
+
+.col.yellowQuadrant {
+  background-color: yellow;
+  height: 16vw;
+  border-bottom-left-radius: 100%;
+  border: 2vw solid black;
+  border-top: 1vw solid black;
+  border-right: 1vw solid black;
+}
+
+.col.blueQuadrant {
+  background-color: blue;
+  height: 16vw;
+  border-bottom-right-radius: 100%;
+  border: 2vw solid black;
+  border-top: 1vw solid black;
+  border-left: 1vw solid black;
+}
+
+.active {
+  opacity: 0.5;
+}

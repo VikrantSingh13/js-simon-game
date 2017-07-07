@@ -1,0 +1,140 @@
+var greenQuad = document.querySelector("#q1");
+var redQuad = document.querySelector("#q2");
+var yellowQuad = document.querySelector("#q3");
+var blueQuad = document.querySelector("#q4");
+var gameQuads = [greenQuad, redQuad, yellowQuad, blueQuad];
+var quads = document.getElementsByClassName("quads");
+
+var randomSequence = [];
+var currentScore = 0;
+var highScore = 0;
+var counter = 0;
+var isGameOver = false;
+var isDisplaying = false;
+//dom elements for scores
+var currentScoreEle = document.querySelector(".currentScore");
+var highScoreEle = document.querySelector(".highScore");
+
+var gameAudio = new Audio('https://soundbible.com/grab.php?id=1598&type=mp3');
+var gameOverAudio = new Audio("https://soundbible.com/grab.php?id=1830&type=mp3");
+var highScoreAudio = new Audio("https://soundbible.com/grab.php?id=1964&type=mp3");
+
+
+var sleep = (time) => {
+  return new Promise((resolve) => setTimeout(resolve, time));
+};
+
+
+
+window.onload = async () => {
+  await sleep(1000);
+  var startButton = document.querySelector("#startButton");
+  startButton.addEventListener('click', () => {
+    currentScore = 0;
+    isGameOver = false;
+    startGame();
+    
+  });
+};
+
+var startGame = async () => {
+  randomSequence = [];
+  await sleep(600);
+  generateRandomSequence(currentScore + 1);
+  console.log(randomSequence);
+  
+  updateCurrentScore();
+  
+  isDisplaying = true;
+  for(var i = 0; i < randomSequence.length; i++) {
+    if(!isGameOver) {
+      await sleep(500);
+      displayColor(randomSequence[i], 600);
+      await sleep(500);
+    }
+  }
+  isDisplaying = false;
+}
+
+//displayColor takes in the quadrant to light up, and for how long
+var displayColor = async (quadrant, timer) => {
+  gameQuads[quadrant].classList.add("active");
+  gameAudio.currentTime = 0;
+  gameAudio.play();
+  await sleep(timer).then(() => {
+    gameQuads[quadrant].classList.remove("active");
+    gameAudio.pause();
+  });
+  
+};
+
+var generateRandomSequence = (n) => {
+  for(var i = 0; i < n; i++) {
+    var m = Math.floor((Math.random() * 4) + 0);
+    randomSequence.push(m);
+  }
+};
+
+var checkUserInput = async (event) => {
+  if (!isDisplaying) {
+    console.log(event.target.id);
+    displayColor(parseInt(event.target.id.substring(1,2)) - 1, 200);
+
+    await sleep(250);
+
+    if("q" + (randomSequence[counter] + 1) !== event.target.id) {
+      console.log("it was q" + (randomSequence[counter] + 1));
+      counter = 0;
+      displayGameOver();
+      return;
+    } else {
+      counter += 1;
+      //if the user has answered correctly we move to 
+      if(counter > currentScore) {
+        currentScore = counter;
+        counter = 0;
+        startGame();
+        return;
+      }
+    }
+  }
+};
+
+
+var displayGameOver = async () => {
+  isGameOver = true;
+  isDisplaying = false;
+  
+  updateCurrentScore();
+  
+  
+  gameOverAudio.play();
+  alert("Game Over! You scored: " + currentScore + ". Press Start to play again.");
+  gameOverAudio.pause();
+  gameOverAudio.currentTime = 0;
+  
+  
+  await sleep(500);
+  if(currentScore > highScore){
+    highScore = currentScore;
+    updateHighScore();
+    
+    
+    highScoreAudio.play();
+    alert("New Highscore!!!");
+    highScoreAudio.pause();
+    highScoreAudio.currentTime = 0;
+    
+  }
+  
+};
+
+var updateCurrentScore = () => {
+  currentScoreEle.innerHTML = currentScore;
+}
+
+var updateHighScore = () => {
+  highScoreEle.innerHTML = currentScore;
+}
+
+$('.quads').on('click', checkUserInput);
