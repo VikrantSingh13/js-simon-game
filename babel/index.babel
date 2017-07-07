@@ -10,6 +10,7 @@ var currentScore = 0;
 var highScore = 0;
 var counter = 0;
 var isGameOver = false;
+var isGameRunning = false;
 var isDisplaying = false;
 //dom elements for scores
 var currentScoreEle = document.querySelector(".currentScore");
@@ -32,15 +33,15 @@ window.onload = async () => {
   startButton.addEventListener('click', () => {
     currentScore = 0;
     isGameOver = false;
+    isGameRunning = true;
     startGame();
     
   });
 };
 
 var startGame = async () => {
-  randomSequence = [];
   await sleep(600);
-  generateRandomSequence(currentScore + 1);
+  generateSequence();
   console.log(randomSequence);
   
   updateCurrentScore();
@@ -68,11 +69,9 @@ var displayColor = async (quadrant, timer) => {
   
 };
 
-var generateRandomSequence = (n) => {
-  for(var i = 0; i < n; i++) {
-    var m = Math.floor((Math.random() * 4) + 0);
-    randomSequence.push(m);
-  }
+//appends a random number between 0 - 4 to our sequence array
+var generateSequence = (n) => {
+    randomSequence.push(Math.floor((Math.random() * 4) + 0));
 };
 
 var checkUserInput = async (event) => {
@@ -102,29 +101,35 @@ var checkUserInput = async (event) => {
 
 
 var displayGameOver = async () => {
-  isGameOver = true;
-  isDisplaying = false;
-  
-  updateCurrentScore();
-  
-  
-  gameOverAudio.play();
-  alert("Game Over! You scored: " + currentScore + ". Press Start to play again.");
-  gameOverAudio.pause();
-  gameOverAudio.currentTime = 0;
-  
-  
-  await sleep(500);
-  if(currentScore > highScore){
-    highScore = currentScore;
-    updateHighScore();
-    
-    
-    highScoreAudio.play();
-    alert("New Highscore!!!");
-    highScoreAudio.pause();
-    highScoreAudio.currentTime = 0;
-    
+  if (isGameRunning) {
+    isGameOver = true;
+    isGameRunning = false;
+    isDisplaying = false;
+
+    updateCurrentScore();
+    randomSequence = [];
+
+
+    gameOverAudio.play();
+    alert("Game Over! You scored: " + currentScore + ". Press Start to play again.");
+
+    gameOverAudio.pause();
+    await sleep(500);
+    gameOverAudio.currentTime = 0;
+
+
+    await sleep(250);
+    if(currentScore > highScore){
+      highScore = currentScore;
+      updateHighScore();
+
+
+      highScoreAudio.play();
+      alert("New Highscore!!!");
+      highScoreAudio.pause();
+      highScoreAudio.currentTime = 0;
+
+    }
   }
   
 };

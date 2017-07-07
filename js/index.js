@@ -14,6 +14,7 @@ var currentScore = 0;
 var highScore = 0;
 var counter = 0;
 var isGameOver = false;
+var isGameRunning = false;
 var isDisplaying = false;
 //dom elements for scores
 var currentScoreEle = document.querySelector(".currentScore");
@@ -44,6 +45,7 @@ window.onload = _asyncToGenerator(regeneratorRuntime.mark(function _callee() {
           startButton.addEventListener('click', function () {
             currentScore = 0;
             isGameOver = false;
+            isGameRunning = true;
             startGame();
           });
 
@@ -62,12 +64,11 @@ var startGame = function () {
       while (1) {
         switch (_context2.prev = _context2.next) {
           case 0:
-            randomSequence = [];
-            _context2.next = 3;
+            _context2.next = 2;
             return sleep(600);
 
-          case 3:
-            generateRandomSequence(currentScore + 1);
+          case 2:
+            generateSequence();
             console.log(randomSequence);
 
             updateCurrentScore();
@@ -75,34 +76,34 @@ var startGame = function () {
             isDisplaying = true;
             i = 0;
 
-          case 8:
+          case 7:
             if (!(i < randomSequence.length)) {
-              _context2.next = 18;
+              _context2.next = 17;
               break;
             }
 
             if (isGameOver) {
-              _context2.next = 15;
+              _context2.next = 14;
               break;
             }
 
-            _context2.next = 12;
+            _context2.next = 11;
             return sleep(500);
 
-          case 12:
+          case 11:
             displayColor(randomSequence[i], 600);
-            _context2.next = 15;
+            _context2.next = 14;
             return sleep(500);
 
-          case 15:
+          case 14:
             i++;
-            _context2.next = 8;
+            _context2.next = 7;
             break;
 
-          case 18:
+          case 17:
             isDisplaying = false;
 
-          case 19:
+          case 18:
           case "end":
             return _context2.stop();
         }
@@ -146,11 +147,9 @@ var displayColor = function () {
   };
 }();
 
-var generateRandomSequence = function generateRandomSequence(n) {
-  for (var i = 0; i < n; i++) {
-    var m = Math.floor(Math.random() * 4 + 0);
-    randomSequence.push(m);
-  }
+//appends a random number between 0 - 4 to our sequence array
+var generateSequence = function generateSequence(n) {
+  randomSequence.push(Math.floor(Math.random() * 4 + 0));
 };
 
 var checkUserInput = function () {
@@ -215,20 +214,32 @@ var displayGameOver = function () {
       while (1) {
         switch (_context5.prev = _context5.next) {
           case 0:
+            if (!isGameRunning) {
+              _context5.next = 15;
+              break;
+            }
+
             isGameOver = true;
+            isGameRunning = false;
             isDisplaying = false;
 
             updateCurrentScore();
+            randomSequence = [];
 
             gameOverAudio.play();
             alert("Game Over! You scored: " + currentScore + ". Press Start to play again.");
-            gameOverAudio.pause();
-            gameOverAudio.currentTime = 0;
 
-            _context5.next = 9;
+            gameOverAudio.pause();
+            _context5.next = 11;
             return sleep(500);
 
-          case 9:
+          case 11:
+            gameOverAudio.currentTime = 0;
+
+            _context5.next = 14;
+            return sleep(250);
+
+          case 14:
             if (currentScore > highScore) {
               highScore = currentScore;
               updateHighScore();
@@ -239,7 +250,7 @@ var displayGameOver = function () {
               highScoreAudio.currentTime = 0;
             }
 
-          case 10:
+          case 15:
           case "end":
             return _context5.stop();
         }
