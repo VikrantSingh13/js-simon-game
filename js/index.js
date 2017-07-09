@@ -69,41 +69,40 @@ var startGame = function () {
 
           case 2:
             generateSequence();
-            console.log(randomSequence);
 
             updateCurrentScore();
 
             isDisplaying = true;
             i = 0;
 
-          case 7:
+          case 6:
             if (!(i < randomSequence.length)) {
-              _context2.next = 17;
+              _context2.next = 16;
               break;
             }
 
             if (isGameOver) {
-              _context2.next = 14;
+              _context2.next = 13;
               break;
             }
 
-            _context2.next = 11;
+            _context2.next = 10;
             return sleep(500);
 
-          case 11:
+          case 10:
             displayColor(randomSequence[i], 600);
-            _context2.next = 14;
+            _context2.next = 13;
             return sleep(500);
 
-          case 14:
+          case 13:
             i++;
-            _context2.next = 7;
+            _context2.next = 6;
             break;
 
-          case 17:
+          case 16:
             isDisplaying = false;
 
-          case 18:
+          case 17:
           case "end":
             return _context2.stop();
         }
@@ -159,33 +158,31 @@ var checkUserInput = function () {
         switch (_context4.prev = _context4.next) {
           case 0:
             if (isDisplaying) {
-              _context4.next = 18;
+              _context4.next = 16;
               break;
             }
 
-            console.log(event.target.id);
             displayColor(parseInt(event.target.id.substring(1, 2)) - 1, 200);
 
-            _context4.next = 5;
+            _context4.next = 4;
             return sleep(250);
 
-          case 5:
+          case 4:
             if (!("q" + (randomSequence[counter] + 1) !== event.target.id)) {
-              _context4.next = 12;
+              _context4.next = 10;
               break;
             }
 
-            console.log("it was q" + (randomSequence[counter] + 1));
             counter = 0;
             displayGameOver();
             return _context4.abrupt("return");
 
-          case 12:
+          case 10:
             counter += 1;
             //if the user has answered correctly we move to
 
             if (!(counter > currentScore)) {
-              _context4.next = 18;
+              _context4.next = 16;
               break;
             }
 
@@ -194,7 +191,7 @@ var checkUserInput = function () {
             startGame();
             return _context4.abrupt("return");
 
-          case 18:
+          case 16:
           case "end":
             return _context4.stop();
         }

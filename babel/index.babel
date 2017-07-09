@@ -42,7 +42,6 @@ window.onload = async () => {
 var startGame = async () => {
   await sleep(600);
   generateSequence();
-  console.log(randomSequence);
   
   updateCurrentScore();
   
@@ -76,13 +75,11 @@ var generateSequence = (n) => {
 
 var checkUserInput = async (event) => {
   if (!isDisplaying) {
-    console.log(event.target.id);
     displayColor(parseInt(event.target.id.substring(1,2)) - 1, 200);
 
     await sleep(250);
 
     if("q" + (randomSequence[counter] + 1) !== event.target.id) {
-      console.log("it was q" + (randomSequence[counter] + 1));
       counter = 0;
       displayGameOver();
       return;
